@@ -343,7 +343,7 @@ client.on('message', message => {
 });
 
 client.on('message', msg => {
-     if(msg.content === '+help')
+     if(msg.content === '+quranhelp')
                  setTimeout(function() {
    msg.reply('+quranplay اسم السورة')
                  }, 10000)
