@@ -342,6 +342,13 @@ client.on('message', message => {
     }
 });
 
+client.on('message', msg => {
+     if(msg.content === '+help')
+                 setTimeout(function() {
+   msg.reply('+quranplay اسم السورة')
+                 }, 10000)
+   });
+
 client.on('ready', () => {
    console.log(`----------------`);
       console.log(`Desert Bot- Script By : EX Clan`);
@@ -349,7 +356,7 @@ client.on('ready', () => {
       console.log(`ON ${client.guilds.size} Servers '     Script By : EX Clan ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`+quran|for listening`,"http://twitch.tv/Death Shop")
+client.user.setGame(`+quranhelp|for listening`,"http://twitch.tv/3rab-pros")
 client.user.setStatus("dnd")
 });
 
