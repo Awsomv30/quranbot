@@ -360,4 +360,19 @@ client.user.setGame(`+quranhelp|for listening`,"http://twitch.tv/3rab-pros")
 client.user.setStatus("dnd")
 });
 
+client.on('message', msg => {
+
+    if (msg.content == '$join') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('white_check_mark'));
+     }
+    }
+}
+})
+client.on('ready', () => { //code bot not leave room voice //Bot Is Online
+    client.channels.get("469550052822482954").join(); //by :n3k4a 
+    });
+
 client.login(process.env.BOT_TOKEN);
