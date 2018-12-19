@@ -313,19 +313,16 @@ function play(guild, song) {
 
 
 client.on('message', message => {
-    if (message.content === 'help') {
+    if (message.content === '+quranhelp') {
         let helpEmbed = new Discord.RichEmbed()
-        .setTitle('**أوامر الميوزك...**')
-        .setDescription('**برفكس البوت (!)**')
-        .addField('play', 'لتشغيل اغنية')
-        .addField('join', 'دخول رومك الصوتي')
-        .addField('disconnect', 'الخروج من رومك الصوتي')
-        .addField('skip', 'تخطي الأغنية')
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
-        .addField('resume', 'تكملة الاغنية')
-        .addField('queue', 'اظهار قائمة التشغيل')
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
-        .setFooter('(general_commands) لاظهار الاوامر العامة')
+        .setTitle('**أوامر القران...**')
+        .setDescription('**برفكس البوت (+)**')
+        .addField('+quranplay ', 'لتشغيل سورة')
+        .addField('+quranleave', 'الخروج من رومك الصوتي')
+        .addField('skip', 'تخطي السورة')
+        .addField('+quarnpause', 'ايقاف السورة مؤقتا')
+        .addField('+quranresume', 'تكملة السورة')
+        .addField('-quran', 'لتشغيل القران كامل')
       message.channel.send(helpEmbed);
     }
 });
@@ -374,5 +371,36 @@ client.on('message', msg => {
 client.on('ready', () => { //code bot not leave room voice //Bot Is Online
     client.channels.get("469550052822482954").join(); //by :n3k4a 
     });
+
+client.on('message', message => {
+const yt = require('ytdl-core');
+  if (message.content.startsWith('-quran')) {
+              if(!message.channel.guild) return message.reply('** This command only for servers **');
+
+    const voiceChannel = message.member.voiceChannel;
+    if (!voiceChannel) {
+      return message.reply(`من فضلك ادخل روم صوتي `);
+    }
+    voiceChannel.join()
+      .then(connnection => {
+        let stream = yt('https://www.youtube.com/watch?v=9-oGnGaI9Ps&t=8009s', {audioonly: true});
+        const dispatcher = connnection.playStream(stream);
+        dispatcher.on('end', () => {
+          voiceChannel.leave();
+        });
+      });
+  }
+  
+  if (message.content.startsWith('-stop')) {
+              if(!message.channel.guild) return message.reply('** This command only for servers **');
+
+    const voiceChannel = message.member.voiceChannel;
+    if (!voiceChannel) {
+      return message.reply(`من فضلك ادخل روم صوتي `);
+    }
+voiceChannel.leave();
+  }
+
+});
 
 client.login(process.env.BOT_TOKEN);
